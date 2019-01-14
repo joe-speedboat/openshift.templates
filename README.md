@@ -6,7 +6,7 @@ Below you can find my notes about to create a template from existing deployment 
 ```
 oc new-project project-name
 oc new-app --name=app-name --docker-image=docker.io/christian773/xfce-vnc:latest VNC_PW=vnc-pw
-oc expose svc/app-name --hostname=appurl.app.office.bitbull.ch --port=6901
+oc expose svc/app-name --hostname=appurl.app.domain.com --port=6901
 
 oc export dc,is,svc,route --as-template=xfce-vnc > xfce-vnc.yml
 cp xfce-vnc.yml xfce-vnc.yml.orig
@@ -14,7 +14,7 @@ cp xfce-vnc.yml xfce-vnc.yml.orig
 sed -i '/namespace: /d' xfce-vnc.yml
 sed -i 's@: docker-registry.default.svc.*@: docker.io/christian773/xfce-vnc:latest@' xfce-vnc.yml
 sed -i 's@docker.io/christian773.*@docker.io/christian773/xfce-vnc:latest@' xfce-vnc.yml
-sed -i 's/appurl.app.office.bitbull.ch/${APPLICATION_DOMAIN}/g' xfce-vnc.yml
+sed -i 's/appurl.app.domain.com/${APPLICATION_DOMAIN}/g' xfce-vnc.yml
 sed -i 's/app-name/${NAME}/g' xfce-vnc.yml
 sed -i 's/vnc-pw/${VNC_PW}/g' xfce-vnc.yml
 echo 'parameters:
